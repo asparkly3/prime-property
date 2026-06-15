@@ -108,20 +108,16 @@
                 if (currentUser.role === 'guest') return go ('login');
                 app.innerHTML = '<div class="container"><div style="display:flex;justify-content:space-between;margin-bottom:20px;"><h2>Daftar Properti (' + (currentUser.role === 'superadmin' ? 'Superadmin' : 'Admin') + ')</h2><div> <button class="btn-outline" onclick="logout()">Logout</button>' + (currentUser.role === 'superadmin' ? '<button class="btn" onclick="openFormAdd()">+ Tambah</button>' : '') + '</div></div><div class="filter-bar"><input id="s" placeholder="Cari..." oninput="renderTable()"><select id="k" onchange="renderTable()"><option value="">Kawasan</option><option>Kratakau</option><option>Pancing</option><option>Helvetia</option></select><select id="st" onchange="renderTable()"><option value="">Status</option><option value="in_stock">In Stock</option><option value="sold_out">Sold Out</option></select><select id="siap" onchange="renderTable()"><option value="">Siap</option><option value="siap_huni">Siap Huni</option><option value="siap_kosong">Siap Kosong</option></select><button class="btn" onclick="resetFilter()">Reset</button></div><div class="table-box"><table><thead><tr><th>Nama<th>Group<th>Ukuran<th>Harga<th>Hadap<th>Tingkat<th>Carport<th>Tipe<th>Status<th>Siap<th>Aksi</th></tr></thead><tbody id="tbody"></tbody></table></div></div>';
                 renderTable();
-                document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-    const targetPage = document.getElementById(page);
-    if (targetPage) targetPage.style.display = 'block';
-
-    // 2. KUNCI TOMBOL DASHBOARD (Cukup tambahkan bagian ini di paling bawah fungsi go)
-    const tombolDashboard = document.getElementById('tombol-dashboard-nav');
+            }
+               const tombolDashboard = document.getElementById('tombol-dashboard-nav');
     if (tombolDashboard) {
-        if (currentUser && currentUser.role) {
-            tombolDashboard.style.display = 'inline-block'; // Muncul kalau sudah login
+        if (currentUser && currentUser.role && currentUser.role !== 'guest') {
+            tombolDashboard.style.display = 'inline-block';
         } else {
-            tombolDashboard.style.display = 'none'; // Sembunyi kalau belum login
-         }
-                
+            tombolDashboard.style.display = 'none';
         }
+                
+       }
     }
         function renderCard(p) {
             return '<div class="card"><h3>'+p.nama+'</h3><p class="price">Rp'+p.harga.toLocaleString("id-ID")+'</p><small>'+p.kawasan+'</small></div>'
