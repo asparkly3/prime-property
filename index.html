@@ -156,25 +156,26 @@
         function handleLogin(e) {
     e.preventDefault();
     
+    // 1. Mengambil elemen input email dan password dari form
     const inputs = e.target.querySelectorAll('input');
-    const email = inputs[0].value;
-    const password = inputs[1].value;
+    const email = inputs[0].value.trim();
+    const password = inputs[1].value.trim();
 
-    // VALIDASI FIX SESUAI DOKUMEN AC (Role-Based Access)
-    if (email === "GANTI_PAKAI_EMAIL_ADMIN_DI_DM" && password === "GANTI_PASW_ADMIN_DI_DM") {
+    // 2. Cek Akun Admin
+    if (email === "admin@prime.com" && password === "admin123") {
         currentUser = { role: 'admin' };
         go('dashboard');
-        showToast('Login Admin Berhasil!');
+        if (typeof showToast === 'function') showToast('Login Admin Berhasil!');
     } 
-    else if (email === "GANTI_PAKAI_SUPERADMIN_DI_DM" && password === "GANTI_PASW_SUPERADMIN_DI_DM") {
+    // 3. Cek Akun Superadmin
+    else if (email === "superadmin@prime.com" && password === "superadmin123") {
         currentUser = { role: 'superadmin' };
         go('dashboard');
-        showToast('Login Superadmin Berhasil!');
+        if (typeof showToast === 'function') showToast('Login Superadmin Berhasil!');
     } 
+    // 4. Jika Salah
     else {
-        // Sesuai AC-8.4: Error menggunakan warna #B33A3A jika salah
-        showToast('Credentials Salah! Akses Ditolak.');
-        alert('Email atau Password salah!');
+        alert('Email atau Password salah! Gunakan akun testing admin@prime.com / admin123');
     }
 }
         function handleContact(e) {
