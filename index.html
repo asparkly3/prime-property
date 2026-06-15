@@ -79,6 +79,7 @@
             <a href="#" onclick="go('about')">Tentang</a>
             <a href="#" onclick="go('contact')">Kontak</a>
             <a href="#" onclick="go('login')" class="btn-outline">Login</a>
+            <a href="#" id="tombol-dashboard-nav" onclick="go('dashboard')" style="display: none; color: #C9A961; font-weight: bold;">Dashboard</a>
         </nav>
     </header>
     
@@ -107,6 +108,18 @@
                 if (currentUser.role === 'guest') return go ('login');
                 app.innerHTML = '<div class="container"><div style="display:flex;justify-content:space-between;margin-bottom:20px;"><h2>Daftar Properti (' + (currentUser.role === 'superadmin' ? 'Superadmin' : 'Admin') + ')</h2><div> <button class="btn-outline" onclick="logout()">Logout</button>' + (currentUser.role === 'superadmin' ? '<button class="btn" onclick="openFormAdd()">+ Tambah</button>' : '') + '</div></div><div class="filter-bar"><input id="s" placeholder="Cari..." oninput="renderTable()"><select id="k" onchange="renderTable()"><option value="">Kawasan</option><option>Kratakau</option><option>Pancing</option><option>Helvetia</option></select><select id="st" onchange="renderTable()"><option value="">Status</option><option value="in_stock">In Stock</option><option value="sold_out">Sold Out</option></select><select id="siap" onchange="renderTable()"><option value="">Siap</option><option value="siap_huni">Siap Huni</option><option value="siap_kosong">Siap Kosong</option></select><button class="btn" onclick="resetFilter()">Reset</button></div><div class="table-box"><table><thead><tr><th>Nama<th>Group<th>Ukuran<th>Harga<th>Hadap<th>Tingkat<th>Carport<th>Tipe<th>Status<th>Siap<th>Aksi</th></tr></thead><tbody id="tbody"></tbody></table></div></div>';
                 renderTable();
+                document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+    const targetPage = document.getElementById(page);
+    if (targetPage) targetPage.style.display = 'block';
+
+    // 2. KUNCI TOMBOL DASHBOARD (Cukup tambahkan bagian ini di paling bawah fungsi go)
+    const tombolDashboard = document.getElementById('tombol-dashboard-nav');
+    if (tombolDashboard) {
+        if (currentUser && currentUser.role) {
+            tombolDashboard.style.display = 'inline-block'; // Muncul kalau sudah login
+        } else {
+            tombolDashboard.style.display = 'none'; // Sembunyi kalau belum login
+         }
                 
         }
     }
