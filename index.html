@@ -154,14 +154,29 @@
             console.log('hasil render =', tbody.innerHTML);
         }
         function handleLogin(e) {
-            e.preventDefault();
-            const email =  e.target.querySelector('input').value;
-            if(email.includes('admin')) {
-                currentUser = {role:'admin'};
-            } else {
-         currentUser = {role:'superadmin'}};
-            go('dashboard');
-        }
+    e.preventDefault();
+    
+    const inputs = e.target.querySelectorAll('input');
+    const email = inputs[0].value;
+    const password = inputs[1].value;
+
+    // VALIDASI FIX SESUAI DOKUMEN AC (Role-Based Access)
+    if (email === "GANTI_PAKAI_EMAIL_ADMIN_DI_DM" && password === "GANTI_PASW_ADMIN_DI_DM") {
+        currentUser = { role: 'admin' };
+        go('dashboard');
+        showToast('Login Admin Berhasil!');
+    } 
+    else if (email === "GANTI_PAKAI_SUPERADMIN_DI_DM" && password === "GANTI_PASW_SUPERADMIN_DI_DM") {
+        currentUser = { role: 'superadmin' };
+        go('dashboard');
+        showToast('Login Superadmin Berhasil!');
+    } 
+    else {
+        // Sesuai AC-8.4: Error menggunakan warna #B33A3A jika salah
+        showToast('Credentials Salah! Akses Ditolak.');
+        alert('Email atau Password salah! Periksa kembali DM Discord Anda.');
+    }
+}
         function handleContact(e) {
             e.preventDefault();
             alert('Pesan Terkirim!');
