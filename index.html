@@ -32,8 +32,10 @@
         }
 
         .main-logo {
-    height: 100px; /* Tinggal gedein angka ini biar logonya membesar sesuai maumu */
-    width: auto;
+   height: 40px;          /* Mengembalikan tinggi header agar ramping seperti semula */
+    width: 140px;         /* Memaksa lebar gambar melebar ke samping */
+    object-fit: cover;    /* Memotong (crop) ruang kosong bawaan di atas & bawah gambar */
+    object-position: center;
 }
         
         nav a {margin-left: 20px; font-size: 14px;} 
