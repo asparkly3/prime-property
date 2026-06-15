@@ -10,9 +10,34 @@
         :root { --p: #1A1A1A; --g: #C9A961; --r: #B33A3A; --bg: #F5F5F5; --w: #FFF;} 
         body {font-family: 'Inter', sans-serif; margin: 0; color: var(--p);}
         a {text-decoration: none; color: inherit;}
-        header {background: var(--p); color: var(--w); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;} 
-        .logo {font-weight: bold; font-size: 20px; color: var(--g); cursor: pointer;}
-        nav a {margin-left: 20px; font-size: 14px;} .btn-outline {border: 1px solid var(--g); padding: 5px 15px; border-radius: 4px; color: var(--g) !important;}
+        
+        /* HEADER UTAMA */
+        header {
+            background: var(--p); 
+            color: var(--w); 
+            padding: 15px 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100;
+        } 
+        
+        /* LOGO BARU DI SEBELAH KIRI */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .main-logo {
+    height: 100px; /* Tinggal gedein angka ini biar logonya membesar sesuai maumu */
+    width: auto;
+}
+        
+        nav a {margin-left: 20px; font-size: 14px;} 
+        .btn-outline {border: 1px solid var(--g); padding: 5px 15px; border-radius: 4px; color: var(--g) !important;}
         .hero {background: var(--p); color: var(--w); text-align: center; padding: 80px  20px;} 
         .hero h1 span { color: var(--g); } 
         .hero p {color: #aaa; margin: 15px 0 25px;}
@@ -40,12 +65,13 @@
         .modal {display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5)} 
         .modal-content {background: var(--w); margin: 10% auto; padding: 30px; border-radius: 8px; width: 90%; max-width: 500px;}
         .close {float: right; font-size: 28px; font-weight: bold; cursor: pointer;}
-
     </style>
 </head>
 <body>
     <header>
-        <div class="logo" onclick="go('home')">PRIME PROPERTY</div>
+        <a href="#" class="logo-container" onclick="go('home')">
+            <img src="https://media.discordapp.net/attachments/1504546422165344356/1509473595653492767/Desain_tanpa_judul_33.png?ex=6a306095&is=6a2f0f15&hm=c136cc73cd7c9e356f8daddeb1f57bdd57ba2b68e779486dde28db3d7177e7ad&=&format=webp&quality=lossless&width=1154&height=769" alt="Prime Property Logo" class="main-logo">
+        </a>
         <nav id="nav">
             <a href="#" onclick="go('home')">Beranda</a>
             <a href="#" onclick="go('about')">Tentang</a>
@@ -53,9 +79,11 @@
             <a href="#" onclick="go('login')" class="btn-outline">Login</a>
         </nav>
     </header>
+    
     <div id="app"></div>
     <div id="toast"></div>
     <div id="modal" class="modal"><div class="modal-content"><span class="close" onclick="closeModal()">&times;</span><div id="modalBody"></div></div></div>
+    
     <script>
         let properties = [
             { id: 1, nama: "Aston Villas", group: "Mentari", lebar: 4.5, panjang: 21.5, hadap: "Utara", tipe: "Villa", tingkat: 2, harga: 1350000000, carport: true, status: "in_stock", siap: "siap_huni", kawasan: "Kratakau", deletedAt: null},
